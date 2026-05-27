@@ -1,0 +1,17 @@
+[project]
+name = "vision-agents-plugins-interhuman-example"
+version = "0.0.0"
+description = "Interhuman plugin example for Vision Agents"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "python-dotenv>=1.0",
+    "vision-agents",
+    "vision-agents-plugins-interhuman",
+    "vision-agents-plugins-getstream",
+    "vision-agents-plugins-deepgram",
+    "vision-agents-plugins-openai",
+    "vision-agents-plugins-elevenlabs",
+]
+
+[tool.uv.sources]
+"vision-agents-plugins-interhuman" = { path = "..", editable = true }

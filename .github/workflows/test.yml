@@ -1,0 +1,71 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit:
+    name: lint + type + unit tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Sync dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Ruff
+        run: uv run --no-sync ruff check .
+
+      - name: Mypy
+        run: uv run --no-sync mypy
+
+      - name: Pytest (unit)
+        run: uv run --no-sync pytest -m "not integration" -v
+
+  integration:
+    name: integration tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Pytest (integration)
+        env:
+          INTERHUMAN_API_KEY: ${{ secrets.INTERHUMAN_API_KEY }}
+        run: |
+          if [ -z "${INTERHUMAN_API_KEY}" ]; then
+            echo "INTERHUMAN_API_KEY not set; skipping integration tests"
+            exit 0
+          fi
+          uv run --no-sync pytest -m integration -v
