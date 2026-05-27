@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "vision-agents-plugins-interhuman-streaming"
 dynamic = ["version"]
-description = "Real-time streaming plugin for Vision Agents using the Interhuman streaming API"
+description = "Social intelligence for Vision Agents — real-time behavioral signal detection, engagement tracking, and conversation quality scoring from live video and audio"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

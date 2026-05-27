@@ -1,22 +1,27 @@
 # Interhuman Plugins for Vision Agents
 
-[Vision Agents](https://visionagents.ai/) plugins that wrap the
-[Interhuman](https://docs.interhuman.ai/) social-intelligence API.
+Social intelligence for your Vision Agents — detect behavioral signals, track engagement, and score conversation quality from video and audio in real time or post-session. Make agents that read the room.
 
-This repo is a [uv workspace](https://docs.astral.sh/uv/concepts/workspaces/)
-with two independently-versioned PyPI packages:
+[Interhuman](https://docs.interhuman.ai/) analyzes how people communicate: hesitation, confusion, agreement, frustration, and 10 other observable behaviors across voice, facial expressions, and body language. These plugins wire that capability into any [Vision Agents](https://visionagents.ai/) agent.
 
-| Package | Path | Purpose |
+## Packages
+
+This repo is a [uv workspace](https://docs.astral.sh/uv/concepts/workspaces/) with two independently-versioned PyPI packages:
+
+| Package | Install | Use when |
 | --- | --- | --- |
-| [`vision-agents-plugins-interhuman-streaming`](streaming/) | `streaming/` | Real-time streaming of a live call to `wss://api.interhuman.ai/v1/stream/analyze`, emitting typed signal / engagement / conversation-quality events on the agent bus. |
-| [`vision-agents-plugins-interhuman-analysis`](analysis/) | `analysis/` | *(scaffold)* Post-processing upload analysis via `POST /v1/upload/analyze` for recorded sessions. |
+| [`interhuman-streaming`](streaming/) | `uv add vision-agents-plugins-interhuman-streaming` | Live call — react to signals as they happen |
+| [`interhuman-analysis`](analysis/) | `uv add vision-agents-plugins-interhuman-analysis` | Recorded video — analyze a session after the fact |
 
-## Choosing a package
+Both share no runtime code and can be installed side by side.
 
-- **Live conversation, react in real time** → `streaming`.
-- **Analyze a recorded video offline** → `analysis`.
+## What you can build
 
-You can install both side by side; they share no runtime code.
+- **Adaptive AI tutors** that slow down when a student shows confusion and accelerate on agreement
+- **Interview and sales coaching** that scores communication quality (clarity, authority, energy, rapport) live
+- **Empathetic support agents** that detect frustration or disengagement and adjust tone in the moment
+- **Conversation analytics dashboards** with per-window quality timelines and an overall CQI score (0–100)
+- **Post-session reports** with timestamped behavioral insights from recorded calls
 
 ## Development
 

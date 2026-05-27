@@ -1,8 +1,8 @@
 # Interhuman Analysis Plugin for Vision Agents
 
-Post-processing upload analysis using the [Interhuman](https://docs.interhuman.ai/) `POST /v1/upload/analyze` API: send a recorded clip, get back engagement state, social signals, and (optionally) conversation quality scores.
+Analyze recorded conversations for social signals, engagement patterns, and conversation quality. Send a video file, get back timestamped behavioral insights — who showed confusion at 0:42, when engagement dropped, and an overall quality score.
 
-For real-time analysis on a live call, use [`vision-agents-plugins-interhuman-streaming`](../streaming/) instead.
+For real-time analysis during a live call, use [`interhuman-streaming`](../streaming/) instead.
 
 ## Installation
 
@@ -10,7 +10,7 @@ For real-time analysis on a live call, use [`vision-agents-plugins-interhuman-st
 uv add vision-agents-plugins-interhuman-analysis
 ```
 
-You also need an Interhuman API key. Create one at [platform.interhuman.ai](https://platform.interhuman.ai/) and export it:
+You need an Interhuman API key. Create one at [platform.interhuman.ai](https://platform.interhuman.ai/) and export it:
 
 ```bash
 export INTERHUMAN_API_KEY=...
@@ -38,12 +38,21 @@ if result.conversation_quality and result.conversation_quality.overall:
     print("CQI:", result.conversation_quality.overall.quality_index)
 ```
 
-You can also pass raw bytes instead of a path:
+You can also pass raw bytes:
 
 ```python
 with open("session.mp4", "rb") as fh:
     result = await client.analyze(fh.read())
 ```
+
+## What you get back
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `signals` | `list[Signal]` | 10 signal types (agreement, confusion, hesitation, frustration, etc.) each with `start`, `end`, `probability`, and a human-readable `rationale`. |
+| `engagement_state` | `list[EngagementWindow]` | Per-window state: `engaged`, `neutral`, `disengaged`. |
+| `conversation_quality` | `ConversationQuality \| None` | Overall CQI (0–100) plus five dimension scores: clarity, authority, energy, rapport, learning. Also available as a timeline of per-window scores. Only returned when requested via `include`. |
+| `correlation_id` | `str` | Server-issued ID for support and log correlation. |
 
 ## Input requirements
 
@@ -52,22 +61,13 @@ with open("session.mp4", "rb") as fh:
 - Duration: at least ~3 seconds
 - One subject per video (Interhuman analyzes a single subject at a time)
 
-## Result types
-
-| Field | Type | Notes |
-| --- | --- | --- |
-| `signals` | `list[Signal]` | Twelve types: `agreement`, `confidence`, `confusion`, `disagreement`, `disengagement`, `engagement`, `frustration`, `hesitation`, `interest`, `skepticism`, `stress`, `uncertainty`. Each has `start`, `end`, `probability` (`high` / `medium` / `low`), and a short `rationale`. |
-| `engagement_state` | `list[EngagementWindow]` | Per-window state: `engaged`, `neutral`, `disengaged`. |
-| `conversation_quality` | `ConversationQuality \| None` | `None` unless requested via `include`. Contains an `overall` aggregate and a `timeline` of per-window scores (CQI plus clarity, authority, energy, rapport, learning). |
-| `correlation_id` | `str` | Server-issued ID for support and log correlation. |
-
 ## Configuration
 
 | Argument | Default | Notes |
 | --- | --- | --- |
 | `api_key` | `None` | Falls back to `INTERHUMAN_API_KEY`. |
 | `base_url` | `https://api.interhuman.ai` | Override for staging environments. |
-| `timeout` | `300.0` | Per-request timeout in seconds. The endpoint is synchronous and large clips can take 1–3 minutes. |
+| `timeout` | `300.0` | Per-request timeout in seconds. Large clips can take 1–3 minutes. |
 
 `analyze()` accepts:
 
@@ -78,8 +78,6 @@ with open("session.mp4", "rb") as fh:
 | `client_request_id` | Sent as `X-Client-Request-Id` for log correlation. |
 
 ## Errors
-
-The client raises `InterhumanError` for any structured error response from the API:
 
 ```python
 from vision_agents.plugins.interhuman_analysis import AnalysisClient, InterhumanError

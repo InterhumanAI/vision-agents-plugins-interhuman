@@ -1,7 +1,7 @@
 [project]
 name = "vision-agents-plugins-interhuman-workspace"
 version = "0.0.0"
-description = "uv workspace for the Interhuman streaming and analysis plugins"
+description = "Social intelligence plugins for Vision Agents — detect behavioral signals, track engagement, and score conversation quality"
 requires-python = ">=3.10"
 
 [tool.uv.workspace]

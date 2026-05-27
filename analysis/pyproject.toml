@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "vision-agents-plugins-interhuman-analysis"
 dynamic = ["version"]
-description = "Post-processing upload analysis client for the Interhuman API"
+description = "Social intelligence for Vision Agents — analyze recorded conversations for behavioral signals, engagement patterns, and conversation quality scores"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
