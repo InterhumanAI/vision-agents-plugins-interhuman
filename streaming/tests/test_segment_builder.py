@@ -6,7 +6,7 @@ import av
 import numpy as np
 from getstream.video.rtc import PcmData
 
-from vision_agents.plugins.interhuman.segment_builder import SegmentBuilder
+from vision_agents.plugins.interhuman_streaming.segment_builder import SegmentBuilder
 
 
 def _make_video_frame(width: int, height: int, color: int) -> av.VideoFrame:

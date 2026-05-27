@@ -2,7 +2,7 @@
 
 ## v0.1.0
 
-Initial release.
+Initial release of `vision-agents-plugins-interhuman-streaming`.
 
 ### New Features
 

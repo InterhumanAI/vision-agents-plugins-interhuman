@@ -11,7 +11,7 @@ import websockets
 import websockets.exceptions
 
 from vision_agents.core.events import PluginBaseEvent
-from vision_agents.plugins.interhuman.events import (
+from vision_agents.plugins.interhuman_streaming.events import (
     ConversationQualityScores,
     ConversationQualityWindow,
     InterhumanConversationQualityEvent,

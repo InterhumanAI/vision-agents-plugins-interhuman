@@ -4,7 +4,7 @@ Real-time social-signal, engagement, and conversation-quality analysis using
 the Interhuman streaming API.
 """
 
-from vision_agents.plugins.interhuman.events import (
+from vision_agents.plugins.interhuman_streaming.events import (
     ConversationQualityScores,
     ConversationQualityWindow,
     InterhumanConversationQualityEvent,
@@ -12,7 +12,7 @@ from vision_agents.plugins.interhuman.events import (
     InterhumanRawEvent,
     InterhumanSignalEvent,
 )
-from vision_agents.plugins.interhuman.processor import InterhumanProcessor
+from vision_agents.plugins.interhuman_streaming.processor import InterhumanProcessor
 
 __all__ = [
     "ConversationQualityScores",

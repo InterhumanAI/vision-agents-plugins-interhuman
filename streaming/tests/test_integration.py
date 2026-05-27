@@ -8,13 +8,13 @@ import av
 import numpy as np
 import pytest
 
-from vision_agents.plugins.interhuman.events import (
+from vision_agents.plugins.interhuman_streaming.events import (
     InterhumanConversationQualityEvent,
     InterhumanEngagementEvent,
     InterhumanRawEvent,
     InterhumanSignalEvent,
 )
-from vision_agents.plugins.interhuman.ws_client import WSClient
+from vision_agents.plugins.interhuman_streaming.ws_client import WSClient
 
 
 def _build_sample(seconds: int = 6, fps: int = 15) -> bytes:

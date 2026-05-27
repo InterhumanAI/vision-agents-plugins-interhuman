@@ -6,7 +6,7 @@ import json
 import pytest
 import websockets
 
-from vision_agents.plugins.interhuman.ws_client import WSClient
+from vision_agents.plugins.interhuman_streaming.ws_client import WSClient
 
 
 @pytest.fixture

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vision-agents-plugins-interhuman-streaming"
+dynamic = ["version"]
+description = "Real-time streaming plugin for Vision Agents using the Interhuman streaming API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+    "vision-agents>=0.6.2,<0.7",
+    "av>=12.0.0",
+    "numpy>=1.26.0",
+    "websockets>=14.0",
+]
+
+[project.urls]
+Documentation = "https://docs.interhuman.ai/"
+Website = "https://www.interhuman.ai/"
+Source = "https://github.com/InterhumanAI/vision-agents-plugins-interhuman"
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { root = "..", search_parent_directories = true, fallback_version = "0.0.0" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["vision_agents"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "vision_agents",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "integration: live-API integration tests (requires INTERHUMAN_API_KEY)",
+]
+testpaths = ["tests"]
+

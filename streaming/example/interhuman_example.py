@@ -1,7 +1,7 @@
-"""Run a Vision Agents bot with Interhuman analysis enabled.
+"""Run a Vision Agents bot with Interhuman streaming analysis enabled.
 
 Usage:
-    cd plugins/interhuman/example
+    cd streaming/example
     cp env.example .env  # fill in keys
     uv run interhuman_example.py
 """
@@ -15,7 +15,7 @@ from vision_agents.plugins import (
     deepgram,
     elevenlabs,
     getstream,
-    interhuman,
+    interhuman_streaming as interhuman,
     openai,
 )
 

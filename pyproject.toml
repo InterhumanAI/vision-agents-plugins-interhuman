@@ -1,41 +1,15 @@
-[build-system]
-requires = ["hatchling", "hatch-vcs"]
-build-backend = "hatchling.build"
-
 [project]
-name = "vision-agents-plugins-interhuman"
-dynamic = ["version"]
-description = "Interhuman social-signal streaming plugin for Vision Agents"
-readme = "README.md"
+name = "vision-agents-plugins-interhuman-workspace"
+version = "0.0.0"
+description = "uv workspace for the Interhuman streaming and analysis plugins"
 requires-python = ">=3.10"
-license = "MIT"
-dependencies = [
-    "vision-agents>=0.6.2,<0.7",
-    "av>=12.0.0",
-    "numpy>=1.26.0",
-    "websockets>=14.0",
-]
 
-[project.urls]
-Documentation = "https://docs.interhuman.ai/"
-Website = "https://www.interhuman.ai/"
-Source = "https://github.com/InterhumanAI/vision-agents-plugins-interhuman"
+[tool.uv.workspace]
+members = ["streaming", "analysis"]
 
-[tool.hatch.version]
-source = "vcs"
-raw-options = { fallback_version = "0.0.0" }
-
-[tool.hatch.build.targets.wheel]
-packages = ["vision_agents"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "vision_agents",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "pyproject.toml",
-]
+[tool.uv.sources]
+"vision-agents-plugins-interhuman-streaming" = { workspace = true }
+"vision-agents-plugins-interhuman-analysis" = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -44,20 +18,28 @@ dev = [
     "python-dotenv>=1.0.0",
     "ruff>=0.6.0",
     "mypy>=1.10.0",
+    "vision-agents-plugins-interhuman-streaming",
+    "vision-agents-plugins-interhuman-analysis",
 ]
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-markers = [
-    "integration: live-API integration tests (requires INTERHUMAN_API_KEY)",
-]
-testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+extend-exclude = [".venv", "**/.venv", "example"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "integration: live-API integration tests",
+]
+testpaths = ["streaming/tests", "analysis/tests"]
 
 [tool.mypy]
 python_version = "3.10"
 ignore_missing_imports = true
-packages = ["vision_agents.plugins.interhuman"]
+explicit_package_bases = true
+mypy_path = "streaming:analysis"
+packages = [
+    "vision_agents.plugins.interhuman_streaming",
+    "vision_agents.plugins.interhuman_analysis",
+]

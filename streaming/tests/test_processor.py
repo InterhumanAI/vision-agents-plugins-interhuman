@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 from getstream.video.rtc import PcmData
 
-from vision_agents.plugins.interhuman import InterhumanProcessor
+from vision_agents.plugins.interhuman_streaming import InterhumanProcessor
 
 
 def _pcm(duration_ms: float, participant_id: str) -> PcmData:

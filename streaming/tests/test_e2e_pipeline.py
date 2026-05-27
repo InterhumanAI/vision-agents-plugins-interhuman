@@ -12,7 +12,7 @@ from aiortc import VideoStreamTrack
 from getstream.video.rtc import PcmData
 from vision_agents.core.events import EventManager
 
-from vision_agents.plugins.interhuman import (
+from vision_agents.plugins.interhuman_streaming import (
     InterhumanConversationQualityEvent,
     InterhumanEngagementEvent,
     InterhumanProcessor,

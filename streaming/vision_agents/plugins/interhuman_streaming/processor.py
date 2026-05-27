@@ -16,14 +16,14 @@ from vision_agents.core.processors.base_processor import (
 )
 from vision_agents.core.utils.video_forwarder import VideoForwarder
 
-from vision_agents.plugins.interhuman.events import (
+from vision_agents.plugins.interhuman_streaming.events import (
     InterhumanConversationQualityEvent,
     InterhumanEngagementEvent,
     InterhumanRawEvent,
     InterhumanSignalEvent,
 )
-from vision_agents.plugins.interhuman.segment_builder import SegmentBuilder
-from vision_agents.plugins.interhuman.ws_client import WSClient
+from vision_agents.plugins.interhuman_streaming.segment_builder import SegmentBuilder
+from vision_agents.plugins.interhuman_streaming.ws_client import WSClient
 
 logger = logging.getLogger(__name__)
 

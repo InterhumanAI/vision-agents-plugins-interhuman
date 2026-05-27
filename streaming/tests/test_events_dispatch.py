@@ -1,6 +1,6 @@
 """Tests for parsing Interhuman server JSON into typed events."""
 
-from vision_agents.plugins.interhuman.events import (
+from vision_agents.plugins.interhuman_streaming.events import (
     ConversationQualityScores,
     ConversationQualityWindow,
     InterhumanConversationQualityEvent,
@@ -8,7 +8,7 @@ from vision_agents.plugins.interhuman.events import (
     InterhumanRawEvent,
     InterhumanSignalEvent,
 )
-from vision_agents.plugins.interhuman.ws_client import parse_server_event
+from vision_agents.plugins.interhuman_streaming.ws_client import parse_server_event
 
 
 class TestParseServerEvent:
