@@ -1,4 +1,4 @@
-# Interhuman Plugin
+# Interhuman Plugin for Vision Agents
 
 Real-time social-signal, engagement, and conversation-quality analysis for Vision Agents using the [Interhuman](https://docs.interhuman.ai/) streaming API.
 
