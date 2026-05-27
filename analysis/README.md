@@ -1,4 +1,4 @@
-# Interhuman Analysis Plugin
+# Interhuman Analysis Plugin for Vision Agents
 
 Post-processing upload analysis for the [Interhuman](https://docs.interhuman.ai/) API.
 
