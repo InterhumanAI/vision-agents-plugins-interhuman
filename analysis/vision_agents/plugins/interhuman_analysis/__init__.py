@@ -1,8 +1,31 @@
-"""Interhuman post-processing upload-analysis client for Vision Agents.
+"""Interhuman post-processing upload-analysis client for Vision Agents."""
 
-This package is currently a scaffold. The public API will mirror the streaming
-plugin's event types but expose a request/response client for the
-``POST /v1/upload/analyze`` endpoint.
-"""
+from vision_agents.plugins.interhuman_analysis.client import (
+    AnalysisClient,
+    InterhumanError,
+)
+from vision_agents.plugins.interhuman_analysis.types import (
+    AnalysisResult,
+    ConversationQuality,
+    ConversationQualityScores,
+    ConversationQualityWindow,
+    EngagementState,
+    EngagementWindow,
+    Probability,
+    Signal,
+    SignalType,
+)
 
-__all__: list[str] = []
+__all__ = [
+    "AnalysisClient",
+    "AnalysisResult",
+    "ConversationQuality",
+    "ConversationQualityScores",
+    "ConversationQualityWindow",
+    "EngagementState",
+    "EngagementWindow",
+    "InterhumanError",
+    "Probability",
+    "Signal",
+    "SignalType",
+]
