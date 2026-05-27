@@ -37,7 +37,7 @@ include = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 markers = [
-    "integration: live-API integration tests (requires INTERHUMAN_KEY_ID/INTERHUMAN_KEY_SECRET)",
+    "integration: live-API integration tests (requires INTERHUMAN_API_KEY)",
 ]
 testpaths = ["tests"]
 
